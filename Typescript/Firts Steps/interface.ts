@@ -72,3 +72,26 @@ function showInfo(object: string | number[]) {
 
 showInfo('123')
 showInfo('Hola mundo');
+
+
+interface Mario {
+    company: string;
+    name: string;
+    jump: () => void;
+}
+
+interface Sonic {
+    company: string;
+    name: string;
+    run: () => void;
+}
+
+type MarioSonic = Mario | Sonic;
+
+function startPlay(personaje: MarioSonic) {
+    if ('jump' in personaje) {
+        personaje.jump();
+    } else {
+        personaje.run();
+    }
+}
