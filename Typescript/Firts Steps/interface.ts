@@ -88,10 +88,13 @@ interface Sonic {
 
 type MarioSonic = Mario | Sonic;
 
+function checkPlayer(player: MarioSonic): player is Mario {
+    return (player as Mario).jump !== undefined; // retornamos un booleano
+}   
+
+
 function startPlay(personaje: MarioSonic) {
-    if ('jump' in personaje) {
+    if (checkPlayer(personaje)){
         personaje.jump();
-    } else {
-        personaje.run();
     }
 }
