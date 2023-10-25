@@ -1,9 +1,11 @@
-class Hero {
-    readonly name: string; // solo lectura
-    // #powerScore: number; // private
+import { IHero } from "./types.d";
+
+class Hero implements Hero {
+    name: string; // solo lectura
+    // // #powerScore: number; // private
     private powerScore: number; // Privado solo accesible desde la clase
-    wonBattles: number = 0;
-    protected age: number; // Solo accesible desde la clase y sus subclases
+    // wonBattles: number = 0;
+    // protected age: number; // Solo accesible desde la clase y sus subclases
 
     constructor(name: string, powerScore: number) {
         this.name = name;
