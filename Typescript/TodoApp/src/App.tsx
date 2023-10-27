@@ -1,24 +1,32 @@
 import { useState } from 'react'
+import { Todos } from './Components/Todos'
 
-function App() {
-  const [count, setCount] = useState(0)
+const todosMocks = [
+  {
+    id: '1',
+    title: 'Learn React',
+    completed: false
+  },
+  {
+    id: '2',
+    title: 'Learn Typescript',
+    completed: false
+  },
+  {
+    id: '3',
+    title: 'Learn Redux',
+    completed: false
+  }
+]
+
+function App (): JSX.Element {
+  const [todos] = useState(todosMocks)
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="App">
+      <Todos todos={todos} />
+    </div>
   )
 }
 
-export default App
+export { App }
