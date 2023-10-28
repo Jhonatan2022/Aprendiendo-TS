@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Todos } from './Components/Todos'
+import { Todos } from '../Todos'
 
 const todosMocks = [
   {
@@ -23,7 +23,7 @@ function App (): JSX.Element {
   const [todos] = useState(todosMocks)
 
   return (
-    <div className="App">
+    <div className="todoapp">
       <Todos todos={todos} />
     </div>
   )
