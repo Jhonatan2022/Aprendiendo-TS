@@ -10,7 +10,7 @@ const todosMocks = [
   {
     id: '2',
     title: 'Learn Typescript',
-    completed: false
+    completed: true
   },
   {
     id: '3',
@@ -20,11 +20,18 @@ const todosMocks = [
 ]
 
 function App (): JSX.Element {
-  const [todos] = useState(todosMocks)
+  const [todos, setTodos] = useState(todosMocks)
+
+  const handleRemove = (id: string): void => {
+    const newTodos = todos.filter((todo) => todo.id !== id)
+    setTodos(newTodos)
+  }
 
   return (
     <div className="todoapp">
-      <Todos todos={todos} />
+      <Todos
+        handleRemove={handleRemove}
+        todos={todos} />
     </div>
   )
 }
