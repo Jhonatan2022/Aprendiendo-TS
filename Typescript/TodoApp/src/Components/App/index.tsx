@@ -50,6 +50,11 @@ function App (): JSX.Element {
 
   const activeCount = todos.filter((todo) => !todo.completed).length
 
+  const removeTaskCompleted = (): void => {
+    const newTodos = todos.filter((todo) => !todo.completed)
+    setTodos(newTodos)
+  }
+
   return (
     <div className="todoapp">
       <Todos
@@ -62,7 +67,7 @@ function App (): JSX.Element {
         activeCount={activeCount}
         completedCount={todos.length - activeCount}
         filtersSelected={filterSelected}
-        clearCompleted={() => { }}
+        clearCompleted={removeTaskCompleted}
         handleFilterChange={handleFilterChange}
       />
     </div>
