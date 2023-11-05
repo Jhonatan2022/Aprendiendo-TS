@@ -7,5 +7,6 @@ export interface Todo {
 }
 export type TodoId = Pick<Todo, 'id'>
 export type ListTodos = Todo[]
+export type TodoTitle = Pick<Todo, 'title'>
 
 export type FilterValue = (typeof TODO_FILTERS)[keyof typeof TODO_FILTERS]
