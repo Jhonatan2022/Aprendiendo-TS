@@ -1,45 +1,46 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useReducer } from 'react'
-import { type State } from '../../Types/types'
+import { type Action, type State } from '../../Types/types'
+import './Styles.css'
 
 const initialState: State = {
-  frontLanguage: 'auto',
+  fromLanguage: 'auto',
   toLanguage: 'en',
-  frontText: '',
+  fromText: '',
   result: '',
   loading: false
 }
 
-function reducer (state: State, action) {
-  const { type, payload } = action
+function reducer (state: State, action: Action) {
+  const { type } = action
 
   if (type === 'INTERCHANGE_LANGUAGES') {
     return {
       ...state,
-      frontLanguage: state.toLanguage,
-      toLanguage: state.frontLanguage
+      fromLanguage: state.toLanguage,
+      toLanguage: state.fromLanguage
     }
   }
 
-  if (type === 'SET_FRONT_LANGUAGE') {
+  if (type === 'SET_FROM_LANGUAGE') {
     return {
       ...state,
-      frontLanguage: payload
+      fromLanguage: action.payload
     }
   }
 
   if (type === 'SET_TO_LANGUAGE') {
     return {
       ...state,
-      toLanguage: payload
+      toLanguage: action.payload
     }
   }
 
-  if (type === 'SET_FRONT_TEXT') {
+  if (type === 'SET_FROM_TEXT') {
     return {
       ...state,
       loading: true,
-      frontText: payload,
+      fromText: action.payload,
       result: ''
     }
   }
@@ -48,7 +49,7 @@ function reducer (state: State, action) {
     return {
       ...state,
       loading: false,
-      result: payload
+      result: action.payload
     }
   }
 
@@ -56,11 +57,17 @@ function reducer (state: State, action) {
 }
 
 function App () {
-  const [state, dispatch] = useReducer(initialState)
+  const [{ fromLanguage }, dispatch] =
+    useReducer(reducer, initialState)
+
+  console.log({ fromLanguage })
 
   return (
     <div className="App">
       <h1>Google Traslate</h1>
+      <button onClick={() => {
+        dispatch({ type: 'SET_FROM_LANGUAGE', payload: 'es' })
+      }}>Change to Spanish</button>
     </div>
   )
 }
