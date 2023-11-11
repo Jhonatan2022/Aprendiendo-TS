@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import './Styles.css'
 import { useStore } from '../../Hooks/useStore'
 import { AUTO_LANGUAGE } from '../../Constants/const'
@@ -8,7 +8,13 @@ import { LanguageSelector } from '../LanguageSelector'
 import { SectionType } from '../../Types/types'
 
 function App () {
-  const { fromLanguage, interchangeLanguages, toLanguage, setFromLanguage, setToLanguage } = useStore()
+  const {
+    fromLanguage,
+    interchangeLanguages,
+    toLanguage,
+    setFromLanguage,
+    setToLanguage
+  } = useStore()
 
   return (
     <Container fluid>
@@ -19,13 +25,20 @@ function App () {
           <LanguageSelector
             type={SectionType.From}
             value={fromLanguage}
-            onChange={setFromLanguage} />
+            onChange={setFromLanguage}
+          />
           {fromLanguage}
+
+          <Form.Control
+            as="textarea"
+            placeholder="Enter text to translate..."
+            autoFocus
+          />
         </Col>
 
         <Col>
           <Button
-            variant='link'
+            variant="link"
             disabled={fromLanguage === AUTO_LANGUAGE}
             onClick={() => {
               interchangeLanguages()
@@ -39,7 +52,8 @@ function App () {
           <LanguageSelector
             type={SectionType.To}
             value={toLanguage}
-            onChange={setToLanguage} />
+            onChange={setToLanguage}
+          />
           {toLanguage}
         </Col>
       </Row>
