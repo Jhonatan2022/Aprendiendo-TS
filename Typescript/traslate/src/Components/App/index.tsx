@@ -1,19 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
 import './Styles.css'
 import { useStore } from '../../Hooks/useStore'
 import { AUTO_LANGUAGE } from '../../Constants/const'
 import { ArrowIcon } from '../../Icons'
 import { LanguageSelector } from '../LanguageSelector'
 import { SectionType } from '../../Types/types'
+import { TextArea } from '../TextArea'
 
 function App () {
   const {
+    loading,
     fromLanguage,
     interchangeLanguages,
     toLanguage,
     setFromLanguage,
-    setToLanguage
+    setToLanguage,
+    fromText,
+    result,
+    setFromText,
+    setResult
   } = useStore()
 
   return (
@@ -22,18 +28,20 @@ function App () {
 
       <Row>
         <Col>
-          <LanguageSelector
-            type={SectionType.From}
-            value={fromLanguage}
-            onChange={setFromLanguage}
-          />
-          {fromLanguage}
+          <Stack gap={2}>
+            <LanguageSelector
+              type={SectionType.From}
+              value={fromLanguage}
+              onChange={setFromLanguage}
+            />
+            {fromLanguage}
 
-          <Form.Control
-            as="textarea"
-            placeholder="Enter text to translate..."
-            autoFocus
-          />
+            <TextArea
+              type={SectionType.From}
+              value={fromText}
+              onChange={setFromText}
+              />
+          </Stack>
         </Col>
 
         <Col>
@@ -49,12 +57,19 @@ function App () {
         </Col>
 
         <Col>
-          <LanguageSelector
-            type={SectionType.To}
-            value={toLanguage}
-            onChange={setToLanguage}
-          />
-          {toLanguage}
+          <Stack gap={2}>
+            <LanguageSelector
+              type={SectionType.To}
+              value={toLanguage}
+              onChange={setToLanguage}
+            />
+            <TextArea
+              loading={loading}
+              type={SectionType.To}
+              value={result}
+              onChange={setResult}
+              />
+          </Stack>
         </Col>
       </Row>
     </Container>
