@@ -1,5 +1,11 @@
+import Example from '../ListOfUser'
+
 function App () {
-  return <></>
+  return (
+    <>
+      <Example />
+    </>
+  )
 }
 
 export { App }
