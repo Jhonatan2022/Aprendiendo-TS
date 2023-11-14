@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
-import './Styles.css'
 import { useStore } from '../../Hooks/useStore'
 import { AUTO_LANGUAGE } from '../../Constants/const'
 import { ArrowIcon } from '../../Icons'
 import { LanguageSelector } from '../LanguageSelector'
-import { SectionType } from '../../Types/types'
+import { SectionType } from '../../Types/types.d'
 import { TextArea } from '../TextArea'
+import './Styles.css'
 
 function App () {
   const {
@@ -34,7 +34,6 @@ function App () {
               value={fromLanguage}
               onChange={setFromLanguage}
             />
-            {fromLanguage}
 
             <TextArea
               type={SectionType.From}
