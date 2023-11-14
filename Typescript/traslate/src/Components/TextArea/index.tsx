@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap'
-import { SectionType } from '../../Types/types'
+import { SectionType } from '../../Types/types.d'
 
 interface Props {
   type: SectionType
@@ -8,7 +8,7 @@ interface Props {
   value: string
 }
 
-const commonStyle = { border: 0, height: '200px' }
+const commonStyle = { border: 0, height: '200px', width: '200px' }
 
 const getPlaceholder = ({
   type,
@@ -36,6 +36,7 @@ const TextArea = ({ type, loading, value, onChange }: Props) => {
     <Form.Control
       autoFocus={type === SectionType.From}
       as="textarea"
+      disabled={type === SectionType.To}
       placeholder={getPlaceholder({ type, loading })}
       style={styles}
       onChange={handleChange}
