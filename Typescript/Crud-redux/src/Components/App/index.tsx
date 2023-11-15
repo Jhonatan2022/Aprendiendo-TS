@@ -1,9 +1,9 @@
-import Example from '../ListOfUser'
+import { ListOfUsers } from '../ListOfUser'
 
 function App () {
   return (
     <>
-      <Example />
+      <ListOfUsers />
     </>
   )
 }
