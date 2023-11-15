@@ -6,7 +6,7 @@ function Icons () {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
-        stroke="currentColor"
+        stroke="#f00"
         className="w-6 h-6"
       >
         <path
@@ -25,7 +25,8 @@ function Icons () {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
-        stroke="currentColor"
+        // stroke="currentColor"
+        stroke="#00b"
         className="w-6 h-6"
       >
         <path

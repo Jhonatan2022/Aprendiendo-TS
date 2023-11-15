@@ -5,7 +5,9 @@ import {
   TableCell,
   TableHead,
   TableHeaderCell,
-  TableBody
+  TableBody,
+  Title,
+  Badge
 } from '@tremor/react'
 import { Icons } from '../Icons'
 
@@ -35,11 +37,15 @@ const users: {
   }
 ]
 
-function ListOfUsers () {
+function ListOfUsers() {
   const { TrashIcon, EditIcon } = Icons()
 
   return (
     <Card>
+      <Title>
+        Users
+        <Badge style={{ marginLeft: '8px' }}>{users.length}</Badge>
+      </Title>
       <Table>
         <TableHead>
           <TableRow>
@@ -68,10 +74,10 @@ function ListOfUsers () {
               </TableCell>
               <TableCell>{item.email}</TableCell>
               <TableCell>
-                <button type='button' >
+                <button type="button">
                   <EditIcon />
                 </button>
-                <button type='button' >
+                <button type="button">
                   <TrashIcon />
                 </button>
               </TableCell>
