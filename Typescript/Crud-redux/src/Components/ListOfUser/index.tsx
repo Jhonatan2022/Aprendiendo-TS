@@ -11,32 +11,6 @@ import {
 } from '@tremor/react'
 import { Icons } from '../Icons'
 
-const users: {
-  id: string
-  name: string
-  email: string
-  github: string
-}[] = [
-  {
-    id: '1',
-    name: 'John Doe',
-    email: 'j@gmail.com',
-    github: 'jhonatan2022'
-  },
-  {
-    id: '2',
-    name: 'Jane Doe',
-    email: 'kk@gmail.com',
-    github: 'manuel'
-  },
-  {
-    id: '3',
-    name: 'John Smith',
-    email: 'sc@gmail.com',
-    github: 'jose'
-  }
-]
-
 function ListOfUsers() {
   const { TrashIcon, EditIcon } = Icons()
 
