@@ -10,9 +10,13 @@ import {
   Badge
 } from '@tremor/react'
 import { Icons } from '../Icons'
+import { useAppSelector } from '../../Hook/store'
+import { useUserActions } from '../../Hook/useUserActions'
 
 function ListOfUsers() {
   const { TrashIcon, EditIcon } = Icons()
+  const users = useAppSelector((state) => state.users)
+  const { removeUser } = useUserActions()
 
   return (
     <Card>
@@ -51,7 +55,11 @@ function ListOfUsers() {
                 <button type="button">
                   <EditIcon />
                 </button>
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() => removeUser(item.id)}
+                  aria-label="remove user"
+                >
                   <TrashIcon />
                 </button>
               </TableCell>
