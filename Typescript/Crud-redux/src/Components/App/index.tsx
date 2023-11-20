@@ -1,9 +1,11 @@
 import { ListOfUsers } from '../ListOfUser'
+import { CreateUser } from '../CreateUser'
 
-function App () {
+function App() {
   return (
     <>
       <ListOfUsers />
+      <CreateUser />
     </>
   )
 }
