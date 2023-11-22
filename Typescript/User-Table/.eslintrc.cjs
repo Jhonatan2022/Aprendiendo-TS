@@ -19,8 +19,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsConfigRootDir: __dirname
+    tsconfigRootDir: __dirname
   },
   plugins: ['react'],
-  rules: {} 
+  rules: {
+    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/space-before-function-paren': 'off'
+  }
 }
