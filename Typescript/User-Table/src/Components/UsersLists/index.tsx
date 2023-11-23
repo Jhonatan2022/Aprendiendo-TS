@@ -1,12 +1,14 @@
 import { type User } from '../../Types/types'
 
 interface Props {
+  deleteUser: (email: string) => void
   users: User[]
+  showColors: boolean
 }
 
-function UsersLists({ users }: Props) {
+function UsersLists({ deleteUser, showColors, users }: Props) {
   return (
-    <table>
+    <table width="100%">
       <thead>
         <tr>
           <th>Foto</th>
@@ -18,20 +20,34 @@ function UsersLists({ users }: Props) {
       </thead>
 
       <tbody>
-        {users.map((user) => (
-          <tr key={user.id.value}>
-            <td>
-              <img src={user.picture.thumbnail} alt={user.name.title} />
-            </td>
-            <td>{user.name.first}</td>
-            <td>{user.name.last}</td>
-            <td>{user.location.country}</td>
-            <td>
-                <button>Editar</button>
-                <button>Eliminar</button>
-            </td>
-          </tr>
-        ))}
+        {users.map((user, index) => {
+          const backgroundColor = index % 2 === 0 ? '#333' : '#555'
+          const color = showColors ? backgroundColor : 'transparent'
+
+          return (
+            <tr key={user.email} style={{ backgroundColor: color }}>
+              <td style={{ display: 'flex', justifyContent: 'center' }}>
+                <img
+                  src={user.picture.thumbnail}
+                  alt={user.name.title}
+                  style={{ borderRadius: '50%' }}
+                />
+              </td>
+              <td>{user.name.first}</td>
+              <td>{user.name.last}</td>
+              <td>{user.location.country}</td>
+              <td>
+                <button
+                  onClick={() => {
+                    deleteUser(user.email)
+                  }}
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          )
+        })}
       </tbody>
     </table>
   )
