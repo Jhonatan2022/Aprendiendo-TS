@@ -1,35 +1,41 @@
-import { useEffect, useState, useRef, useMemo } from 'react'
+import { useState, useMemo } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { SortBy, type User } from '../../Types/types.d'
-import './Styles.css'
 import { UsersLists } from '../UsersLists'
+import './Styles.css'
 
 const fetchUsers = async (page: number) => {
   return await fetch(
     `https://randomuser.me/api?results=5&seed=jhonatan&page=${page}`
-  ).then(async (res) => {
-    if (!res.ok) throw new Error('Ha habido un error')
-    return await res.json()
-  })
+  )
+    .then(async (res) => {
+      if (!res.ok) throw new Error('Ha habido un error')
+      return await res.json()
+    })
     .then((res) => res.results)
 }
 
 function App() {
-  const [users, setUsers] = useState<User[]>([])
+  const {
+    isError,
+    isLoading,
+    data: users = []
+  } = useQuery<User[]>({
+    queryKey: ['users'],
+    queryFn: async () => await fetchUsers(1)
+  })
+
   const [showColors, setShowColors] = useState(false)
   const [sortedCountry, setSortedCountry] = useState<SortBy>(SortBy.NONE)
   const [filterCountry, setFilterCountry] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-
-  const originalUsers = useRef<User[]>([])
 
   const toggleColors = () => {
     setShowColors(!showColors)
   }
 
   const handleReset = () => {
-    setUsers(originalUsers.current)
+    // setUsers(originalUsers.current)
   }
 
   const toggleSortByCountry = () => {
@@ -68,31 +74,9 @@ function App() {
   }, [filteredUsers, sortedCountry])
 
   const handleDelete = (email: string) => {
-    const filteredUsers = users.filter((user) => user.email !== email)
-    setUsers(filteredUsers)
+    // const filteredUsers = users.filter((user) => user.email !== email)
+    // setUsers(filteredUsers)
   }
-
-  useEffect(() => {
-    setLoading(true)
-    setError(false)
-    fetchUsers(currentPage)
-      .then((users) => {
-        // then cuando se resuleve la promesa
-        setUsers((prevUsers) => {
-          const newUsers = prevUsers.concat(users)
-          originalUsers.current = newUsers
-          return newUsers
-        })
-      })
-      .catch((err) => {
-        setError(true)
-        console.error(err)
-      })
-      .finally(() => {
-        // cuando se resuelve o rechaza la promesa (siempre se ejecuta)
-        setLoading(false)
-      })
-  }, [currentPage])
 
   return (
     <div className="app">
@@ -119,10 +103,10 @@ function App() {
             showColors={showColors}
           />
         )}
-        {loading && <strong>Cargando...</strong>}
-        {error && <p>Ha habido un error</p>}
-        {users.length === 0 && <p>No hay usuarios</p>}
-        {!loading && !error && (
+        {isLoading && <strong>Cargando...</strong>}
+        {isError && <p>Ha habido un error</p>}
+        {!isError && users.length === 0 && <p>No hay usuarios</p>}
+        {!isLoading && !isError && (
           <button onClick={() => setCurrentPage(currentPage + 1)}>
             Cargar más
           </button>
