@@ -1,41 +1,57 @@
 import { useState, useMemo } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { SortBy, type User } from '../../Types/types.d'
 import { UsersLists } from '../UsersLists'
 import './Styles.css'
 
-const fetchUsers = async (page: number) => {
+const fetchUsers = async ({ pageParam }: { pageParam?: number }) => {
+  console.log('pageParam', pageParam)
   return await fetch(
-    `https://randomuser.me/api?results=5&seed=jhonatan&page=${page}`
+    `https://randomuser.me/api?results=5&seed=jhonatan&page=${pageParam}`
   )
     .then(async (res) => {
       if (!res.ok) throw new Error('Ha habido un error')
       return await res.json()
     })
-    .then((res) => res.results)
+    .then((res) => {
+      const nextCursor = Number(res.info.page) + 1
+      return {
+        users: res.results,
+        nextCursor
+      }
+    })
 }
 
 function App() {
+  const queryKey = ['users']
   const {
     isError,
     isLoading,
-    data: users = []
-  } = useQuery<User[]>({
-    queryKey: ['users'],
-    queryFn: async () => await fetchUsers(1)
+    data,
+    refetch,
+    fetchNextPage
+  } = useInfiniteQuery<{ nextCursor: number, users: User[] }>({
+    queryKey,
+    // queryFn: async ({ pageParam }: any) => await fetchUsers(pageParam),
+    queryFn: fetchUsers,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.nextCursor
   })
+
+  console.log('data', data)
+
+  const users: User[] = data?.pages.flatMap((page) => page.users) ?? []
 
   const [showColors, setShowColors] = useState(false)
   const [sortedCountry, setSortedCountry] = useState<SortBy>(SortBy.NONE)
   const [filterCountry, setFilterCountry] = useState<string | null>(null)
-  const [currentPage, setCurrentPage] = useState(1)
 
   const toggleColors = () => {
     setShowColors(!showColors)
   }
 
-  const handleReset = () => {
-    // setUsers(originalUsers.current)
+  const handleReset = async () => {
+    await refetch()
   }
 
   const toggleSortByCountry = () => {
@@ -86,7 +102,7 @@ function App() {
         <button onClick={toggleSortByCountry}>
           {sortedCountry === SortBy.COUNTRY ? 'Desordenar' : 'Ordenar por país'}
         </button>
-        <button onClick={handleReset}>Resetear</button>
+        <button onClick={() => handleReset}>Resetear</button>
         <input
           placeholder="Buscar país"
           onChange={(e) => {
@@ -105,9 +121,9 @@ function App() {
         )}
         {isLoading && <strong>Cargando...</strong>}
         {isError && <p>Ha habido un error</p>}
-        {!isError && users.length === 0 && <p>No hay usuarios</p>}
+        {!isLoading && !isError && users.length === 0 && <p>No hay usuarios</p>}
         {!isLoading && !isError && (
-          <button onClick={() => setCurrentPage(currentPage + 1)}>
+          <button onClick={() => fetchNextPage()}>
             Cargar más
           </button>
         )}
