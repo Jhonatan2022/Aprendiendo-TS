@@ -1,46 +1,13 @@
 import { useState, useMemo } from 'react'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { SortBy, type User } from '../../Types/types.d'
+import { useUsers } from '../../Hooks/useUsers'
+import { Results } from '../Results'
 import { UsersLists } from '../UsersLists'
 import './Styles.css'
 
-const fetchUsers = async ({ pageParam }: { pageParam?: number }) => {
-  console.log('pageParam', pageParam)
-  return await fetch(
-    `https://randomuser.me/api?results=5&seed=jhonatan&page=${pageParam}`
-  )
-    .then(async (res) => {
-      if (!res.ok) throw new Error('Ha habido un error')
-      return await res.json()
-    })
-    .then((res) => {
-      const nextCursor = Number(res.info.page) + 1
-      return {
-        users: res.results,
-        nextCursor
-      }
-    })
-}
-
 function App() {
-  const queryKey = ['users']
-  const {
-    isError,
-    isLoading,
-    data,
-    refetch,
-    fetchNextPage
-  } = useInfiniteQuery<{ nextCursor: number, users: User[] }>({
-    queryKey,
-    // queryFn: async ({ pageParam }: any) => await fetchUsers(pageParam),
-    queryFn: fetchUsers,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.nextCursor
-  })
-
-  console.log('data', data)
-
-  const users: User[] = data?.pages.flatMap((page) => page.users) ?? []
+  const { isLoading, isError, users, hasNextPage, refetch, fetchNextPage } =
+    useUsers()
 
   const [showColors, setShowColors] = useState(false)
   const [sortedCountry, setSortedCountry] = useState<SortBy>(SortBy.NONE)
@@ -50,8 +17,8 @@ function App() {
     setShowColors(!showColors)
   }
 
-  const handleReset = async () => {
-    await refetch()
+  const handleReset = () => {
+    void refetch()
   }
 
   const toggleSortByCountry = () => {
@@ -97,6 +64,7 @@ function App() {
   return (
     <div className="app">
       <h1>Tabla de usuarios</h1>
+      <Results />
       <header>
         <button onClick={toggleColors}>Colorear Filas</button>
         <button onClick={toggleSortByCountry}>
@@ -122,10 +90,17 @@ function App() {
         {isLoading && <strong>Cargando...</strong>}
         {isError && <p>Ha habido un error</p>}
         {!isLoading && !isError && users.length === 0 && <p>No hay usuarios</p>}
-        {!isLoading && !isError && (
-          <button onClick={() => fetchNextPage()}>
+        {!isLoading && !isError && hasNextPage && (
+          <button
+            onClick={() => {
+              void fetchNextPage()
+            }}
+          >
             Cargar más
           </button>
+        )}
+        {!isLoading && !isError && !hasNextPage && (
+          <strong>No hay más resultados</strong>
         )}
       </main>
     </div>
