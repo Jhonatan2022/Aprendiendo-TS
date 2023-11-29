@@ -15,7 +15,8 @@ function useUsers() {
       queryFn: fetchUsers,
       initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      staleTime: 1000 * 60 * 5 // 5 minutes
     })
 
   return {
