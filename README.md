@@ -5,3 +5,4 @@
 - [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Sonner Notifications](https://sonner.emilkowal.ski/)
 - [TanStack Query](https://react-query.tanstack.com/)
+- [BundlePhobia](https://bundlephobia.com/)
