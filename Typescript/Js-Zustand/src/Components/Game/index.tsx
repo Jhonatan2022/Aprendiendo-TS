@@ -13,6 +13,7 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { useQuestionsStore } from '../../Store/Questions'
 import { type Question as QuestionType } from '../../Types/types'
 import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
+import { Footer } from '../Footer'
 
 const getBackgroundColor = (info: QuestionType, index: number) => {
   const { userSelectedAnswer, correctAnswer } = info
@@ -87,6 +88,8 @@ function Game() {
           <ArrowBackIosNew />
         </IconButton>
 
+        {currentQuestion + 1} / {questions.length}
+
         <IconButton
           onClick={goNextQuestion}
           disabled={currentQuestion >= questions.length - 1}
@@ -95,6 +98,7 @@ function Game() {
         </IconButton>
       </Stack>
       <Question info={questionInfo} />
+      <Footer />
     </>
   )
 }
