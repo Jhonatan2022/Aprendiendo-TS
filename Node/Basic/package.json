@@ -1,0 +1,22 @@
+{
+  "name": "basic",
+  "version": "1.0.0",
+  "description": "![](img/sync-async.png)\r ![](img/Paralelo.png)",
+  "main": "file-sys-async-await.js",
+  "dependencies": {
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "picocolors": "1.0.0",
+    "standard": "^17.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
