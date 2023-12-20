@@ -11,7 +11,7 @@ const processRequest = (req, res) => {
   } else {
     res.end('No se ha encontrado la página')
   }
-}  
+}
 
 const server = http.createServer(processRequest)
 
