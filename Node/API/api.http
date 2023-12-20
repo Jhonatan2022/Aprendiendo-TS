@@ -1,0 +1,17 @@
+### Obtener información de un pokemon
+GET http://localhost:1234/pokemon/ditto
+
+### Crear un pokemon
+POST http://localhost:1234/pokemon
+Content-Type: 'application/json'
+
+{
+    "name": "pikachu",
+    "type": "electric",
+    "moves": [
+        "thunderbolt",
+        "thunder",
+        "thunder wave",
+        "quick attack"
+    ]
+}
