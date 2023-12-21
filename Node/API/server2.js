@@ -5,7 +5,7 @@ const processRequest = (req, res) => {
   const { method, url } = req
   const notFound = () => {
     res.statusCode = 404
-    res.setHeader('Content-Type', 'text/html; charset=utf-8')
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8')
     return res.end('Not found')
   }
 
@@ -22,7 +22,18 @@ const processRequest = (req, res) => {
     case 'POST':
       switch (url) {
         case '/pokemon': {
-          //   const body = []
+          let body = ''
+
+          req.on('data', chunk => {
+            body += chunk.toString()
+          })
+
+          req.on('end', () => {
+            const data = JSON.parse(body)
+            res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' })
+            data.timestamp = Date.now()
+            res.end(JSON.stringify(data))
+          })
           break
         }
 
