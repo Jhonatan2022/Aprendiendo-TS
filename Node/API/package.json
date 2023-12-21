@@ -4,6 +4,7 @@
   "description": "![](img/sync-async.png)\r ![](img/Paralelo.png)",
   "main": "file-sys-async-await.js",
   "dependencies": {
+    "express": "4.18.2",
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
@@ -13,7 +14,8 @@
   },
   "scripts": {
     "dev:1": "nodemon server.js",
-    "dev:2": "nodemon server2.js"
+    "dev:2": "nodemon server2.js",
+    "dev:3": "nodemon express.js"
   },
   "eslintConfig": {
     "extends": "standard"
