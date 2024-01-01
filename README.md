@@ -7,3 +7,4 @@
 - [TanStack Query](https://react-query.tanstack.com/)
 - [BundlePhobia](https://bundlephobia.com/)
 - [React syntax highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/)
+- [FL{}](https://app.fl0.com/) Deploy apps and databases in minutes
