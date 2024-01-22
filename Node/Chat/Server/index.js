@@ -7,7 +7,9 @@ const port = process.env.PORT ?? 1234
 
 const app = express()
 const server = createServer(app)
-const io = new Server(server)
+const io = new Server(server, {
+  connectionStateRecovery: {}
+})
 app.use(logger('dev'))
 
 io.on('connection', (socket) => {
