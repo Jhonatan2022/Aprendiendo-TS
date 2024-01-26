@@ -8,4 +8,3 @@
 - [BundlePhobia](https://bundlephobia.com/)
 - [FL{}](https://app.fl0.com/) Deploy apps and databases in minutes
 - [Excalidraw](https://excalidraw.com/)
-- [Turso](https://turso.tech/)

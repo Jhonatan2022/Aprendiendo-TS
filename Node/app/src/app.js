@@ -1,6 +1,7 @@
-import express from 'express'
+import app from './server/index.js'
+import { connectDB } from './db/index.js'
 
-const app = express()
+connectDB()
 const port = process.env.PORT || 1234
 
 app.listen(port, () => {
