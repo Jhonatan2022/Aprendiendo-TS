@@ -1,0 +1,5 @@
+### Register
+POST http://localhost:1234/register
+
+### Login
+POST http://localhost:1234/login
