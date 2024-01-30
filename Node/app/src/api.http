@@ -5,7 +5,7 @@ Content-Type: application/json; charset=utf-8
 {
     "username": "test2",
     "password": "hola",
-    "email": "juan@gmail.com"
+    "email": "juan2@gmail.com"
 }
 
 ### Login
