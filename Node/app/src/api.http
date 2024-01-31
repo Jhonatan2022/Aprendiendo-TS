@@ -3,9 +3,9 @@ POST http://localhost:1234/api/register
 Content-Type: application/json; charset=utf-8
 
 {
-    "username": "test2",
+    "username": "Usuario prueba",
     "password": "hola",
-    "email": "juan2@gmail.com"
+    "email": "prueba2@gmail.com"
 }
 
 ### Login
