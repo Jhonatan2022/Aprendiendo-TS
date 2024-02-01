@@ -22,3 +22,6 @@ POST http://localhost:1234/api/logout
 
 ### Profile
 GET http://localhost:1234/api/profile
+
+### Task
+GET http://localhost:1234/api/tasks
