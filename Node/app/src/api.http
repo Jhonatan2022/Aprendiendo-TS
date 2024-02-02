@@ -4,8 +4,8 @@ Content-Type: application/json; charset=utf-8
 
 {
     "username": "Juan",
-    "password": "jhon123",
-    "email": "jhon23@gmail.com"
+    "password": "Hola123",
+    "email": "juan33@gmail.com"
 }
 
 ### Login
@@ -13,8 +13,8 @@ POST http://localhost:1234/api/login
 Content-Type: application/json; charset=utf-8
 
 {
-    "email": "jhon@gmail.com",
-    "password": "jhon123"
+    "email": "juan33@gmail.com",
+    "password": "Hola123"
 }
 
 ### Logout
