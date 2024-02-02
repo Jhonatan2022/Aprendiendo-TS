@@ -3,9 +3,9 @@ POST http://localhost:1234/api/register
 Content-Type: application/json; charset=utf-8
 
 {
-    "username": "John",
+    "username": "Juan",
     "password": "jhon123",
-    "email": "jhon@gmail.com"
+    "email": "jhon23@gmail.com"
 }
 
 ### Login
@@ -25,3 +25,27 @@ GET http://localhost:1234/api/profile
 
 ### Task
 GET http://localhost:1234/api/tasks
+
+### Create Task
+POST http://localhost:1234/api/tasks
+Content-Type: application/json; charset=utf-8
+
+{
+    "title": "Task 2",
+    "description": "Description 2"
+}
+
+### Get Task Id
+GET http://localhost:1234/api/tasks/65bc6741fe70e1bd4ef561a5
+
+### Delete Task
+DELETE http://localhost:1234/api/tasks/65bc6741fe70e1bd4ef561a5
+
+### Update Task
+PUT http://localhost:1234/api/tasks/65bc6753fe70e1bd4ef561a8
+Content-Type: application/json; charset=utf-8
+
+{
+    "title": "Tarea 2",
+    "description": "No sé que poner"
+}
