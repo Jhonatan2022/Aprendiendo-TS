@@ -4,8 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
 function RegisterPage() {
-  const { register, handleSubmit } = useForm()
-  const { singup, isAuthenticated } = useAuth()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
+  const { singup, isAuthenticated, errors: registerErrors } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -20,6 +24,11 @@ function RegisterPage() {
 
   return (
     <div className="bg-zinc-800 max-w-md p-10 rounded-md mx-auto my-20">
+      {registerErrors.map((error, i) => (
+        <div key={i} className="bg-red-600 text-white p-1">
+          {error}
+        </div>
+      ))}
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -27,6 +36,9 @@ function RegisterPage() {
           className="w-full bg-zinc-700 text-white px-4 py-2 my-2 rounded-md"
           placeholder="Username"
         />
+        {errors.username && (
+          <p className="text-red-500">Username is required</p>
+        )}
 
         <input
           type="email"
@@ -34,6 +46,7 @@ function RegisterPage() {
           className="w-full bg-zinc-700 text-white px-4 py-2 my-2 rounded-md"
           placeholder="Email"
         />
+        {errors.email && <p className="text-red-500">Email is required</p>}
 
         <input
           type="password"
@@ -41,6 +54,9 @@ function RegisterPage() {
           className="w-full bg-zinc-700 text-white px-4 py-2 my-2 rounded-md"
           placeholder="Password"
         />
+        {errors.password && (
+          <p className="text-red-500">Password is required</p>
+        )}
 
         <button
           type="submit"
