@@ -14,6 +14,7 @@ function App() {
           <Route path="/add-task" />
           <Route path="/tasks/:id" />
           <Route path="/profile" />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
