@@ -30,6 +30,7 @@ function RegisterPage() {
         </div>
       ))}
       <form onSubmit={onSubmit}>
+        <h1 className="text-3xl text-center text-white">Register</h1>
         <input
           type="text"
           {...register('username', { required: true })}
