@@ -49,3 +49,12 @@ Content-Type: application/json; charset=utf-8
     "title": "Tarea 2",
     "description": "No sé que poner"
 }
+
+### Create C
+POST http://localhost:1234/api/cc
+Content-Type: application/json; charset=utf-8
+
+{
+    "name": "Task 2",
+    "description": "Description 2"
+}
