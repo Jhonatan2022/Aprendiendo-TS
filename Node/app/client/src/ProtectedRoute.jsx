@@ -1,16 +1,12 @@
-function ProtectedRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (localStorage.getItem('token')) {
-          return <Component {...props} />
-        } else {
-          return <Redirect to="/login" />
-        }
-      }}
-    />
-  )
+import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from './context/authContext'
+
+function ProtectedRoute() {
+  const { user } = useAuth()
+
+  if (!user) return <Navigate to="/login" />
+
+  return <Outlet />
 }
 
 export { ProtectedRoute }

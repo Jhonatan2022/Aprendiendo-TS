@@ -13,6 +13,7 @@ function App() {
           <Route path="/" element={<h1>inicio</h1>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+
           <Route element={ <ProtectedRoute /> }>
             <Route path="/tasks" element={<h1> task page </h1>} />
             <Route path="/add-task" />
