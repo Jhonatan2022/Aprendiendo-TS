@@ -1,11 +1,13 @@
-import axios from 'axios'
-
-const API = 'http://localhost:1234/api'
+import axios from './axios'
 
 export const registerRequest = async (user) => {
-  return await axios.post(`${API}/register`, user)
+  return await axios.post('/register', user)
 }
 
 export const loginRequest = async (user) => {
-  return await axios.post(`${API}/login`, user)
+  return await axios.post('/login', user)
+}
+
+export const verifyTokenRequest = async () => {
+  return await axios.get('/verify-token')
 }
