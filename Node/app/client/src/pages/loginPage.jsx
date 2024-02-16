@@ -14,7 +14,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/profile')
+      navigate('/tasks')
     }
   }, [isAuthenticated])
 
@@ -65,4 +65,4 @@ function LoginPage() {
   )
 }
 
-export { LoginPage }
+export default LoginPage
