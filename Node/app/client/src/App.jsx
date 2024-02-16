@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { RegisterPage } from './pages/registerPage'
+import RegisterPage from './pages/registerPage'
 import { AuthProvider } from './context/authContext'
-import { LoginPage } from './pages/loginPage'
-import { ProfilePage } from './pages/ProfilePage'
-import { ProtectedRoute } from './ProtectedRoute'
+import LoginPage from './pages/loginPage'
+import ProfilePage from './pages/ProfilePage'
+import ProtectedRoute from './ProtectedRoute'
+import TasksPage from './pages/TasksPage'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
 
           <Route element={ <ProtectedRoute /> }>
-            <Route path="/tasks" element={<h1> task page </h1>} />
+            <Route path="/tasks" element={<TasksPage />} />
             <Route path="/add-task" />
             <Route path="/tasks/:id" />
             <Route path="/profile" element={<ProfilePage />} />

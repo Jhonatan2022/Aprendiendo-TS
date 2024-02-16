@@ -1,6 +1,8 @@
 import { createAccessToken } from '../libs/jwt.js'
 import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import { TOKEN_SECRET } from '../config/index.js'
 
 export const register = async (req, res) => {
   const { username, password, email } = req.body
@@ -65,6 +67,28 @@ export const logout = (req, res) => {
     expires: new Date(0)
   })
   res.json({ message: 'User logged out successfully' })
+}
+
+export const verifyToken = async (req, res) => {
+  const { token  } = req.cookies
+
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' })
+  }
+
+  jwt.verify(token, TOKEN_SECRET, async (err, user) => {
+    if (err) return res.status(403).json({ message: 'Invalid token' })
+
+    const userFound = await User.findById(user.id)
+    if (!userFound) return res.status(400).json({ message: 'User not found' })
+
+    res.json({
+      message: 'User logged successfully',
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email
+    })
+  })
 }
 
 export const profile = async (req, res) => {
