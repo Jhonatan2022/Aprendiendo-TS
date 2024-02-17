@@ -7,12 +7,12 @@ function TasksPage() {
   console.log(user)
 
   const onClick = () => {
-    navigate('/profile')
+    navigate('/new')
   }
 
   return (
     <div>
-      <button onClick={onClick}>Go to Profile Page
+      <button onClick={onClick}>New Task
       </button>
       <h1>Tasks</h1>
     </div>
