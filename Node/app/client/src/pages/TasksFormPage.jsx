@@ -3,17 +3,15 @@ import { useTasks } from '../context/TasksContext'
 
 function TasksFormPage() {
   const { register, handleSubmit } = useForm()
-  const { tasks } = useTasks()
-
-  console.log(tasks)
+  const { createTask } = useTasks()
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data)
+    createTask(data)
   })
 
   return (
     <div className="bg-zinc-800 max-w-md p-10 rounded-md mx-auto my-20">
-      <form action="" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Title"
