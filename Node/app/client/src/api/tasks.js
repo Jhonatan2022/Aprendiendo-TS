@@ -1,21 +1,21 @@
 import axios from './axios'
 
-export const getTasksRequest = async () => {
-  return await axios.get('/tasks')
+export const getTasksRequest = () => {
+  return axios.get('/tasks')
 }
 
-export const getTaskRequest = async (id) => {
-  return await axios.get(`/tasks/${id}`)
+export const getTaskRequest = (id) => {
+  return axios.get(`/tasks/${id}`)
 }
 
-export const createTaskRequest = async (task) => {
-  return await axios.post('/tasks', task)
+export const createTaskRequest = (task) => {
+  return axios.post('/tasks', task)
 }
 
-export const updateTaskRequest = async (task) => {
-  return await axios.put(`/tasks/${task._id}`, task)
+export const updateTaskRequest = (task) => {
+  return axios.put(`/tasks/${task._id}`, task)
 }
 
-export const deleteTaskRequest = async (id) => {
-  return await axios.delete(`/tasks/${id}`)
+export const deleteTaskRequest = (id) => {
+  return axios.delete(`/tasks/${id}`)
 }
